@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FlickrApp</string>
+    <string name="header_title">Search photos from Flickr public feed</string>
+    <string name="info">Long press on this photo to set up as your device wallpaper</string>
+</resources>
