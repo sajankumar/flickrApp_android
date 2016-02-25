@@ -84,17 +84,29 @@ public class DetailActivity extends AppCompatActivity {
             imageView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    WallpaperManager wm = WallpaperManager.getInstance(getApplicationContext());
-                    Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("Info")
+                            .setMessage("Are you sure you want to set this photo as your device wallpaper?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    WallpaperManager wm = WallpaperManager.getInstance(getApplicationContext());
+                                    Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
-                    if (bitmap != null) {
-                        try {
-                            wm.setBitmap(bitmap);
-                            infoText.setText("Wallpaper updated!");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                                    if (bitmap != null) {
+                                        try {
+                                            wm.setBitmap(bitmap);
+                                            infoText.setText("Wallpaper updated!");
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .show();
                     return true;
                 }
             });
